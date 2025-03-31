@@ -12,7 +12,8 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background-color: #fff;
+            color: #333;
         }
 
         .countdown-container {
@@ -21,22 +22,47 @@
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
         }
 
         h1 {
             font-size: 2rem;
             margin-bottom: 20px;
+            color: #e60000;
         }
 
         .countdown {
             font-size: 3rem;
             font-weight: bold;
-            color: #333;
+            color: #e60000;
         }
 
         .unit {
             font-size: 1.2rem;
             color: #888;
+        }
+
+        .progress-container {
+            margin-top: 20px;
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 20px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #e60000;
+            width: 0%;
+            transition: width 1s ease-in-out;
+        }
+
+        .percentage {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: #e60000;
         }
     </style>
 </head>
@@ -46,6 +72,10 @@
         <div id="countdown" class="countdown">
             00:00:00
         </div>
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+        <div id="percentage" class="percentage">0%</div>
     </div>
 
     <script>
@@ -69,10 +99,21 @@
                 (minutes < 10 ? "0" : "") + minutes + " minutos " +
                 (seconds < 10 ? "0" : "") + seconds + " segundos";
 
+            // Calcula a porcentagem de tempo restante
+            var totalTime = countdownDate - new Date("January 1, 2023 00:00:00").getTime(); // Considerando a data de início como 1º de janeiro de 2023
+            var timeLeft = distance;
+            var progressPercentage = ((totalTime - timeLeft) / totalTime) * 100;
+
+            // Atualiza a barra de progresso e o percentual
+            document.getElementById("progress-bar").style.width = progressPercentage + "%";
+            document.getElementById("percentage").innerHTML = Math.round(progressPercentage) + "%";
+
             // Se a contagem terminar, exibe uma mensagem
             if (distance < 0) {
                 clearInterval(countdownFunction);
                 document.getElementById("countdown").innerHTML = "O tempo acabou!";
+                document.getElementById("progress-bar").style.width = "100%";
+                document.getElementById("percentage").innerHTML = "100%";
             }
         }, 1000);
     </script>
