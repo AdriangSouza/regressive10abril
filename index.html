@@ -6,53 +6,58 @@
     <title>Contagem Regressiva</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #fff;
-            color: #333;
+            background-color: #f1f1f1;
         }
 
         .countdown-container {
-            text-align: center;
-            background-color: #fff;
+            background-color: #333;
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             width: 100%;
+            max-width: 700px;
+            text-align: center;
+            color: #fff;
         }
 
         h1 {
             font-size: 2.5rem;
-            margin-bottom: 20px;
             color: #e60000;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
         }
 
         .countdown-wrapper {
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             align-items: center;
             margin-bottom: 30px;
         }
 
         .countdown {
-            font-size: 3rem;
+            font-size: 4rem;
             font-weight: bold;
-            color: #e60000;
-        }
-
-        .unit {
-            font-size: 1.2rem;
-            color: #888;
+            background: black;
+            color: limegreen;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+            letter-spacing: 5px;
+            border: 2px solid limegreen;
+            margin-right: 20px;
+            text-transform: uppercase;
         }
 
         .progress-container {
             width: 100%;
-            background-color: #ddd;
+            background-color: #555;
             border-radius: 10px;
             overflow: hidden;
             height: 20px;
@@ -67,9 +72,20 @@
 
         .percentage {
             margin-top: 10px;
-            font-size: 1.2rem;
-            color: #e60000;
+            font-size: 1.5rem;
             font-weight: bold;
+            color: #e60000;
+        }
+
+        /* Animations for the countdown display */
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px limegreen, 0 0 20px limegreen; }
+            50% { text-shadow: 0 0 30px limegreen, 0 0 40px limegreen; }
+            100% { text-shadow: 0 0 10px limegreen, 0 0 20px limegreen; }
+        }
+
+        .countdown {
+            animation: glow 1.5s infinite alternate;
         }
     </style>
 </head>
@@ -80,9 +96,9 @@
             <div id="countdown" class="countdown">
                 00:00:00
             </div>
-            <div class="progress-container">
-                <div id="progress-bar" class="progress-bar"></div>
-            </div>
+        </div>
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
         </div>
         <div id="percentage" class="percentage">0%</div>
     </div>
@@ -106,10 +122,10 @@
 
             // Exibe a contagem regressiva no formato DD:HH:MM:SS
             document.getElementById("countdown").innerHTML =
-                (days < 10 ? "0" : "") + days + " dias " +
-                (hours < 10 ? "0" : "") + hours + " horas " +
-                (minutes < 10 ? "0" : "") + minutes + " minutos " +
-                (seconds < 10 ? "0" : "") + seconds + " segundos";
+                (days < 10 ? "0" : "") + days + ":" +
+                (hours < 10 ? "0" : "") + hours + ":" +
+                (minutes < 10 ? "0" : "") + minutes + ":" +
+                (seconds < 10 ? "0" : "") + seconds;
 
             // Calcula a porcentagem de tempo restante
             var totalTime = countdownDate - startDate; // Período total
