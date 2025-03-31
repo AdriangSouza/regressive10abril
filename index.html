@@ -19,17 +19,24 @@
         .countdown-container {
             text-align: center;
             background-color: #fff;
-            padding: 30px;
+            padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
+            max-width: 800px;
             width: 100%;
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
             color: #e60000;
+        }
+
+        .countdown-wrapper {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 30px;
         }
 
         .countdown {
@@ -44,7 +51,6 @@
         }
 
         .progress-container {
-            margin-top: 20px;
             width: 100%;
             background-color: #ddd;
             border-radius: 10px;
@@ -63,17 +69,20 @@
             margin-top: 10px;
             font-size: 1.2rem;
             color: #e60000;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <div class="countdown-container">
         <h1>Contagem Regressiva</h1>
-        <div id="countdown" class="countdown">
-            00:00:00
-        </div>
-        <div class="progress-container">
-            <div id="progress-bar" class="progress-bar"></div>
+        <div class="countdown-wrapper">
+            <div id="countdown" class="countdown">
+                00:00:00
+            </div>
+            <div class="progress-container">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
         </div>
         <div id="percentage" class="percentage">0%</div>
     </div>
@@ -81,6 +90,9 @@
     <script>
         // Define a data de destino: 10 de abril de 2025 à meia-noite
         var countdownDate = new Date("April 10, 2025 00:00:00").getTime();
+
+        // Data de início: 31 de março de 2025
+        var startDate = new Date("March 31, 2025 00:00:00").getTime();
 
         var countdownFunction = setInterval(function() {
             var now = new Date().getTime();
@@ -100,7 +112,7 @@
                 (seconds < 10 ? "0" : "") + seconds + " segundos";
 
             // Calcula a porcentagem de tempo restante
-            var totalTime = countdownDate - new Date("January 1, 2023 00:00:00").getTime(); // Considerando a data de início como 1º de janeiro de 2023
+            var totalTime = countdownDate - startDate; // Período total
             var timeLeft = distance;
             var progressPercentage = ((totalTime - timeLeft) / totalTime) * 100;
 
