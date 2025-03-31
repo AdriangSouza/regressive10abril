@@ -49,23 +49,25 @@
     </div>
 
     <script>
-        // Define o tempo de contagem regressiva (exemplo: 1 hora)
-        var countdownDate = new Date().getTime() + 3600 * 1000; // 1 hora a partir de agora
+        // Define a data de destino: 10 de abril de 2025 à meia-noite
+        var countdownDate = new Date("April 10, 2025 00:00:00").getTime();
 
         var countdownFunction = setInterval(function() {
             var now = new Date().getTime();
             var distance = countdownDate - now;
 
             // Calcula os dias, horas, minutos e segundos restantes
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
             var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Exibe a contagem regressiva no formato HH:MM:SS
+            // Exibe a contagem regressiva no formato DD:HH:MM:SS
             document.getElementById("countdown").innerHTML =
-                (hours < 10 ? "0" : "") + hours + ":" +
-                (minutes < 10 ? "0" : "") + minutes + ":" +
-                (seconds < 10 ? "0" : "") + seconds;
+                (days < 10 ? "0" : "") + days + " dias " +
+                (hours < 10 ? "0" : "") + hours + " horas " +
+                (minutes < 10 ? "0" : "") + minutes + " minutos " +
+                (seconds < 10 ? "0" : "") + seconds + " segundos";
 
             // Se a contagem terminar, exibe uma mensagem
             if (distance < 0) {
